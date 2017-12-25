@@ -3,6 +3,9 @@ from rest_framework.views import APIView, status
 from rest_framework.response import Response
 import json
 from .tasks import push_to_cache
+from language_translate.serializers import LanguageSerializer
+from rest_framework import viewsets
+from language_translate.models import Language
 from language_translate.core.CachingStratergy import CachingContext
 from language_translate.core.CachingStratergy import RedisCacheStrategy
 from language_translate.core.TranslateStrategy import GoogleTranslate
@@ -45,3 +48,11 @@ class TranslateView(APIView):
             status=status.HTTP_200_OK,
             data=response_data
         )
+
+
+class LanguageViewSet(viewsets.ViewSet):
+
+    def list(self, request):
+        queryset = Language.objects.all()
+        serializer = LanguageSerializer(queryset, many=True)
+        return Response(serializer.data)
