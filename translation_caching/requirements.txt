@@ -65,5 +65,5 @@ rsa==3.4.2
 six==1.11.0
 tornado==4.5.2
 uritemplate==3.0.0
-urllib3==1.22
+urllib3==1.26.5
 vine==1.1.4
